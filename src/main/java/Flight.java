@@ -11,6 +11,7 @@ public class Flight {
         this.id = id;
         this.passengers = new ArrayList<>();
 
+        // a comment test
 
     }
 
