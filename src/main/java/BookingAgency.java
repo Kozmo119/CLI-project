@@ -45,7 +45,7 @@ public class BookingAgency {
                 for (Flight f : flights) {
                     if (f.getFlightId() == flightId) {
                         f.addPassenger(passenger);
-                        System.out.println("added " + passenger + " to " + f);
+                        System.out.println("added " + passenger + " to " + f + "\n");
 
                     }
                 }
@@ -80,7 +80,7 @@ public class BookingAgency {
                 for (Flight f : flights) {
                     if (f.getFlightId() == flightId) {
                         f.removePassenger(passenger);
-                        System.out.println("removed " + passenger + " from " + f);
+                        System.out.println("removed " + passenger + " from " + f + "\n");
 
                     }
                 }
@@ -102,11 +102,16 @@ public class BookingAgency {
 
         Flight flight = new Flight(flightDestination, FlightRandomIdGene.flightRandomId());
         flights.add(flight);
-        System.out.println(flight);
+        System.out.println("Added new " + flight + "\n");
+
     }
 
     public void displayAllFlights() {
-        System.out.println(flights);
+        System.out.println("List of flights: ");
+        for (Flight flight : flights){
+            System.out.println(flight);
+        }
+        System.out.println("\n");
     }
 
 
@@ -140,7 +145,7 @@ public class BookingAgency {
         scanner.nextLine(); // Why do we have to add this ? //
         Passenger passenger = new Passenger(passengerName, passengerPhoneNumber, PassengerRandomIdGene.passengerRandomId());
         allPassengers.add(passenger);
-        System.out.println(passenger + " created");
+        System.out.println(passenger + " created" + "\n");
 
 
     }
