@@ -20,11 +20,19 @@ public class BookingAgency {
 
     }
 
+    public List<Passenger> getPassengers() {
+        return this.allPassengers;
+    }
+
+    public List<Flight> getAllFlights() {
+        return this.flights;
+    }
+
     public void start() {
         boolean exit = false;
         int userInput;
-        while(!exit) {
-            System.out.println("Enter option number");
+        while (!exit) {
+            System.out.println("Available actions:");
             System.out.println("[1] Add new flight");
             System.out.println("[2] Cancel a flight");
             System.out.println("[3] Display all available flights");
@@ -32,14 +40,17 @@ public class BookingAgency {
             System.out.println("[5] Book a passenger onto a flight");
             System.out.println("[6] Remove a passenger from a flight");
             System.out.println("[0] exit");
+            System.out.println("Please input a number indicating which action to take:");
 
             userInput = scanner.nextInt();
+
+            //System.out.println("\n");
             switch (userInput) {
                 case 1:
                     addNewFlight();
                     break;
                 case 2:
-                    //cancelFlight();
+                    cancelFlight();
                     break;
                 case 3:
                     displayAllFlights();
@@ -63,8 +74,64 @@ public class BookingAgency {
         }
     }
 
-    public List<Passenger> getPassengers() {
-        return this.allPassengers;
+    public void addNewFlight() {
+        System.out.println("Provide a flight destination: ");
+        String flightDestination = scanner.next();
+
+
+        Flight flight = new Flight(flightDestination, FlightRandomIdGene.flightRandomId());
+        flights.add(flight);
+        System.out.println("Added new " + flight + "\n");
+
+    }
+
+    public void cancelFlight() {
+        System.out.println("Enter id of cancelled flight:");
+        int cancelledFlightId = scanner.nextInt();
+        for (Flight f : flights) {
+            if (f.getFlightId() == cancelledFlightId) {
+                flights.remove(f);
+                System.out.println("Removed " + f + "\n");
+            }
+        }
+    }
+
+    public void displayAllFlights() {
+        System.out.println("List of flights: ");
+        for (Flight flight : flights) {
+            System.out.println(flight);
+        }
+        System.out.println("\n");
+    }
+
+    public void addNewPassenger() {
+
+        System.out.println("Enter Passengers name");
+        scanner.next();
+        String passengerName = scanner.nextLine();
+
+        System.out.println("Enter Passengers phone number");
+        int passengerPhoneNumber;
+        while (!scanner.hasNextInt()) {
+            System.out.println("Please enter a valid phone number");
+            scanner.next();
+
+        }
+        passengerPhoneNumber = scanner.nextInt();
+//        System.out.println("Enter Passengers ID");
+//        int passengerID;
+//        while (!scanner.hasNextInt()) {
+//            System.out.println("Please enter a valid Passengers ID");
+//            scanner.next();
+//
+//        }
+//        passengerID = scanner.nextInt();
+        scanner.nextLine(); // Why do we have to add this ? //
+        Passenger passenger = new Passenger(passengerName, passengerPhoneNumber, PassengerRandomIdGene.passengerRandomId());
+        allPassengers.add(passenger);
+        System.out.println(passenger + " created" + "\n");
+
+
     }
 
     public void bookPassenger() {
@@ -101,8 +168,7 @@ public class BookingAgency {
         }
     }
 
-
-    public void removePassenger(){
+    public void removePassenger() {
         int passengerId;
         int flightId;
         System.out.println("Enter passenger Id to remove");
@@ -136,80 +202,7 @@ public class BookingAgency {
         }
     }
 
-
-
-    public void addNewFlight() {
-        System.out.println("Provide a flight destination: ");
-        String flightDestination = scanner.next();
-
-
-        Flight flight = new Flight(flightDestination, FlightRandomIdGene.flightRandomId());
-        flights.add(flight);
-        System.out.println("Added new " + flight + "\n");
-
-    }
-
-    public void displayAllFlights() {
-        System.out.println("List of flights: ");
-        for (Flight flight : flights){
-            System.out.println(flight);
-        }
-        System.out.println("\n");
-    }
-
-
-    public List<Flight> getAllFlights(){
-        return this.flights;
-    }
-
-
-    public void addNewPassenger() {
-        boolean hasEnteredPhoneNumber = false;
-        // Scanner scanner2 = new Scanner(System.in);       // Needs new scanner otherwise it skips the input when adding a second passengers name /
-        System.out.println("Enter Passengers name");
-        String passengerName = scanner.nextLine();
-        System.out.println("Enter Passengers phone number");
-        int passengerPhoneNumber;
-        while (!scanner.hasNextInt()) {
-            System.out.println("Please enter a valid phone number");
-            scanner.next();
-
-        }
-        passengerPhoneNumber = scanner.nextInt();
-
-//        System.out.println("Enter Passengers ID");
-//        int passengerID;
-//        while (!scanner.hasNextInt()) {
-//            System.out.println("Please enter a valid Passengers ID");
-//            scanner.next();
-//
-//        }
-//        passengerID = scanner.nextInt();
-        scanner.nextLine(); // Why do we have to add this ? //
-        Passenger passenger = new Passenger(passengerName, passengerPhoneNumber, PassengerRandomIdGene.passengerRandomId());
-        allPassengers.add(passenger);
-        System.out.println(passenger + " created" + "\n");
-
-
-    }
-//       private int userInputInt(){
-//
-//           System.out.println("Please enter a phone number");
-//            while (!scanner.hasNextInt()) {
-//                System.out.println("Please enter a valid phone number");
-//                scanner.next();
-//    }
-//
-////        String input = scanner.nextLine();
-////        return parseInt(input);
-
 }
-
-
-//System.out.println("Add a destination");
-//String destination = scanner.nextLine();
-//int userGuess = scanner.nextInt();
-//String userName = scanner.nextLine();
 
 
 

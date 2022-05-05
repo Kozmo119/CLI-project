@@ -15,7 +15,6 @@ public class Flight {
 
     }
 
-
     public String getDestination() {
         return destination;
     }
@@ -37,8 +36,6 @@ public class Flight {
     public void removePassenger(Passenger passenger){
         passengers.remove(passenger);
     }
-
-
 
     @Override
     public String toString() {
