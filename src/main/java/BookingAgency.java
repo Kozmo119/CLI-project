@@ -24,6 +24,35 @@ public class BookingAgency {
         return this.allPassengers;
     }
 
+    public void bookPassenger(){
+        int passengerId;
+        int flightId;
+        System.out.println("Enter passenger Id");
+        passengerId = scanner.nextInt();
+        System.out.println("Enter flight Id");
+        flightId = scanner.nextInt();
+        Passenger passenger = null;
+        for (Passenger p : allPassengers ){
+            System.out.println(p.getId());
+            if (p.getId() == passengerId){
+                passenger = p;
+            }
+        }
+        System.out.println(passenger);
+
+        for (Flight f : flights){
+            if (passenger == null){
+                System.out.println("Passenger does not exist");
+            }   else if (f.getFlightId() == flightId){
+                f.addPassenger(passenger);
+
+                }
+
+            }
+
+        }
+
+
 
     public void addNewFlight() {
         System.out.println("Provide a flight destination: ");

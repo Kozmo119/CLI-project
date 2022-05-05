@@ -3,9 +3,10 @@ public class Main {
 
         BookingAgency bookingAgency = new BookingAgency();
 //        bookingAgency.addNewPassenger();
-//        bookingAgency.addNewPassenger();
+        bookingAgency.addNewPassenger();
         bookingAgency.addNewFlight();
         bookingAgency.addNewFlight();
         bookingAgency.displayAllFlights();
+        bookingAgency.bookPassenger();
     }
 }
