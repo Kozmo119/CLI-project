@@ -10,8 +10,8 @@ public class FlightTest {
 
     @BeforeEach
     public void setUp(){
-        Mani = new Passenger("Mani", 12, 13);
-        Ed = new Passenger("Ed", 14, 16);
+        Mani = new Passenger("Mani", "12", 13);
+        Ed = new Passenger("Ed", "14", 16);
         plane1 = new Flight("Wellington", 134);
     }
 

@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Flight {
+public class Flight implements Serializable {
     private String destination;
     private int flightId;
     private List<Passenger> passengers;

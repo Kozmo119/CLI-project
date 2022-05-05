@@ -8,7 +8,7 @@ public class PassengerTest {
 
    @BeforeEach
     public void setUp(){
-       Mani = new Passenger("Mani", 123,1234);
+       Mani = new Passenger("Mani", "123",1234);
    }
 
    @Test
@@ -18,7 +18,7 @@ public class PassengerTest {
 
    @Test
     public void hasPhoneNumber(){
-       assertThat(Mani.getPhoneNumber()).isEqualTo(123);
+       assertThat(Mani.getPhoneNumber()).isEqualTo("123");
    }
 
    @Test

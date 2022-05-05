@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -28,7 +32,7 @@ public class BookingAgency {
         return this.flights;
     }
 
-    public void start() {
+    public void start() throws IOException {
         boolean exit = false;
         int userInput;
         while (!exit) {
@@ -40,6 +44,7 @@ public class BookingAgency {
             System.out.println("[5] Book a passenger onto flight");
             System.out.println("[6] Remove a passenger from flight");
             System.out.println("[7] Search flights");
+            System.out.println("[8] Write flight data to file");
             System.out.println("[0] exit");
             System.out.println("Please input a number indicating which action to take:");
 
@@ -75,6 +80,10 @@ public class BookingAgency {
                     System.out.println("\nAction taken: search flights");
                     searchFlight();
                     break;
+                case 8:
+                    System.out.println("\nAction taken: write to file");
+                    writeDataToFile();
+                    break;
                 case 0:
                     System.out.println("\nExiting...");
                     exit = true;
@@ -87,8 +96,10 @@ public class BookingAgency {
     }
 
     public void addNewFlight() {
+
         System.out.println("Enter flight destination: ");
-        String flightDestination = scanner.next();
+        scanner.nextLine();
+        String flightDestination = scanner.nextLine();
 
 
         Flight flight = new Flight(flightDestination, FlightRandomIdGene.flightRandomId());
@@ -122,28 +133,34 @@ public class BookingAgency {
     public void addNewPassenger() {
 
         System.out.println("Enter passenger name: ");
-        scanner.next();
+
+        scanner.nextLine();  //why do we need this ?????? rather than scanner.next()
         String passengerName = scanner.nextLine();
 
         System.out.println("Enter passenger phone number");
-        int passengerPhoneNumber;
-        while (!scanner.hasNextInt()) {
-            System.out.println("Please enter a valid phone number");
-            scanner.next();
+        String passengerPhoneNumber;
+//        while (!scanner.hasNext()) {
+//            System.out.println("Please enter a valid phone number");
+//            scanner.next();
+//        }
+
+        passengerPhoneNumber = scanner.nextLine();
+        if (passengerPhoneNumber.matches("^[0-9]+$")){
+            Passenger passenger = new Passenger(passengerName, passengerPhoneNumber, PassengerRandomIdGene.passengerRandomId());
+            allPassengers.add(passenger);
+            System.out.println(passenger + " created");
+        } else {
+            System.out.println("Passenger contact number must contain only digits");
         }
-        passengerPhoneNumber = scanner.nextInt();
-//        System.out.println("Enter Passengers ID");
+
+            //        System.out.println("Enter Passengers ID");
 //        int passengerID;
 //        while (!scanner.hasNextInt()) {
 //            System.out.println("Please enter a valid Passengers ID");
 //            scanner.next();
 //        }
 //        passengerID = scanner.nextInt();
-        scanner.nextLine(); // Why do we have to add this ? //
-        Passenger passenger = new Passenger(passengerName, passengerPhoneNumber, PassengerRandomIdGene.passengerRandomId());
-        allPassengers.add(passenger);
-        System.out.println(passenger + " created");
-
+        //scanner.nextLine(); // Why do we have to add this ?
 
     }
 
@@ -171,15 +188,12 @@ public class BookingAgency {
                 for (Flight f : flights) {
                     if (f.getFlightId() == flightId) {
                         f.addPassenger(passenger);
-                        System.out.println("added " + passenger + " to " + f + "\n");
+                        System.out.println("Booked " + passenger + " onto " + f + "\n");
 
                     }
                 }
-
             }
-
         } else {
-
             System.out.println("Passenger with id " + passengerId + " does not exist");
         }
     }
@@ -237,6 +251,29 @@ public class BookingAgency {
             System.out.println("There are no existing flights to " + searchFlight);
         }
     }
+
+    public void writeDataToFile() throws IOException {
+        File file = new File("src/flightData.txt");
+
+        if (!file.exists()) {
+            file.createNewFile();
+        }
+
+        FileWriter fileWriter = new FileWriter(file);
+        PrintWriter printWriter = new PrintWriter(fileWriter);
+
+        for (Flight flight: flights){
+            printWriter.println(flight);
+            for (Passenger passenger : flight.getPassengers()){
+                printWriter.println("   " + passenger);
+            }
+            printWriter.println();
+        }
+        printWriter.flush();
+        printWriter.close();
+    }
+
+
 }
 
 

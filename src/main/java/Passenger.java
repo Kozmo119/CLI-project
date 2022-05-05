@@ -1,9 +1,11 @@
-public class Passenger {
+import java.io.Serializable;
+
+public class Passenger implements Serializable {
     private String name;
-    private int phoneNumber;
+    private String phoneNumber;
     private int id;
 
-    public Passenger(String name, int phoneNumber, int id){
+    public Passenger(String name, String phoneNumber, int id){
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.id = id;
@@ -13,7 +15,7 @@ public class Passenger {
         return name;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 

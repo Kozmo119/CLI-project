@@ -18,7 +18,7 @@ public class BookingAgencyTest {
         bookingAgency = new BookingAgency();
         flight1 = new Flight("Spain",123241);
         flight2 = new Flight("London",12211);
-        passenger1 = new Passenger("Mani", 123213, 5673);
+        passenger1 = new Passenger("Mani", "123213", 5673);
         bookingAgency.getAllFlights().add(flight1);
     }
 
