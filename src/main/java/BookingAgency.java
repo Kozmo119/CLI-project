@@ -25,14 +25,20 @@ public class BookingAgency {
     }
 
 
-    public void addFlight(String destination, int id) {
-        Flight flight = new Flight(destination, id);
+    public void addNewFlight() {
+        System.out.println("Provide a flight destination: ");
+        String flightDestination = scanner.next();
+
+
+        Flight flight = new Flight(flightDestination, FlightRandomIdGene.flightRandomId());
         flights.add(flight);
+        System.out.println(flight);
     }
 
-    public void displayFlights() {
+    public void displayAllFlights() {
         System.out.println(flights);
     }
+
 
     public void addNewPassenger() {
         boolean hasEnteredPhoneNumber = false;

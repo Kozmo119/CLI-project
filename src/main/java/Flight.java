@@ -28,10 +28,14 @@ public class Flight {
         return flightId;
     }
 
-    public void bookPassenger(Passenger passenger){
+    public void addPassenger(Passenger passenger){
         passengers.add(passenger);
 
 
+    }
+
+    public void removePassenger(Passenger passenger){
+        passengers.remove(passenger);
     }
 
 
@@ -41,7 +45,7 @@ public class Flight {
         return "Flight{" +
                 "destination='" + destination + '\'' +
                 ", flightId=" + flightId +
-                ", passengers=" + passengers +
+
                 '}';
     }
 }
