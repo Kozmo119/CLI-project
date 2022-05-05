@@ -3,12 +3,12 @@ import java.util.List;
 
 public class Flight {
     private String destination;
-    private int id;
+    private int flightId;
     private List<Passenger> passengers;
 
-    public Flight(String destination, int id) {
+    public Flight(String destination, int flightId) {
         this.destination = destination;
-        this.id = id;
+        this.flightId = flightId;
         this.passengers = new ArrayList<>();
 
         // a comment test
@@ -24,8 +24,8 @@ public class Flight {
         return passengers;
     }
 
-    public int getId(){
-        return id;
+    public int getFlightId(){
+        return flightId;
     }
 
     public void bookPassenger(Passenger passenger){
@@ -40,7 +40,7 @@ public class Flight {
     public String toString() {
         return "Flight{" +
                 "destination='" + destination + '\'' +
-                ", id=" + id +
+                ", flightId=" + flightId +
                 ", passengers=" + passengers +
                 '}';
     }
