@@ -34,11 +34,11 @@ public class BookingAgency {
         while (!exit) {
             System.out.println("Available actions:");
             System.out.println("[1] Add new flight");
-            System.out.println("[2] Cancel a flight");
-            System.out.println("[3] Display all available flights");
-            System.out.println("[4] Add a new passenger");
-            System.out.println("[5] Book a passenger onto a flight");
-            System.out.println("[6] Remove a passenger from a flight");
+            System.out.println("[2] Cancel flight");
+            System.out.println("[3] Display all flights");
+            System.out.println("[4] Add new passenger");
+            System.out.println("[5] Book a passenger onto flight");
+            System.out.println("[6] Remove a passenger from flight");
             System.out.println("[0] exit");
             System.out.println("Please input a number indicating which action to take:");
 
@@ -47,35 +47,42 @@ public class BookingAgency {
             //System.out.println("\n");
             switch (userInput) {
                 case 1:
+                    System.out.println("\nAction taken: add new flight");
                     addNewFlight();
                     break;
                 case 2:
+                    System.out.println("\nAction taken: cancel a flight");
                     cancelFlight();
                     break;
                 case 3:
+                    System.out.println("\nAction taken: display all available flights");
                     displayAllFlights();
                     break;
                 case 4:
+                    System.out.println("\nAction taken: add new passenger");
                     addNewPassenger();
                     break;
                 case 5:
+                    System.out.println("\nAction taken: book passenger onto flight");
                     bookPassenger();
                     break;
                 case 6:
+                    System.out.println("\nAction taken: remove passenger from flight");
                     removePassenger();
                     break;
                 case 0:
+                    System.out.println("\nExiting...");
                     exit = true;
                     break;
                 default:
-                    exit = true;
+                    System.out.println("\nPlease enter a valid number\n");
                     break;
             }
         }
     }
 
     public void addNewFlight() {
-        System.out.println("Provide a flight destination: ");
+        System.out.println("Enter flight destination: ");
         String flightDestination = scanner.next();
 
 
@@ -88,12 +95,13 @@ public class BookingAgency {
     public void cancelFlight() {
         System.out.println("Enter id of cancelled flight:");
         int cancelledFlightId = scanner.nextInt();
-        for (Flight f : flights) {
-            if (f.getFlightId() == cancelledFlightId) {
-                flights.remove(f);
-                System.out.println("Removed " + f + "\n");
-            }
+        if (flights.stream().anyMatch(flight -> flight.getFlightId() == cancelledFlightId)) {
+            flights.removeIf(flight -> flight.getFlightId()==cancelledFlightId);
+            System.out.println("Flight with id: " + cancelledFlightId + " removed \n");
+        } else {
+            System.out.println("Flight with id " + cancelledFlightId + " does not exist \n");
         }
+
     }
 
     public void displayAllFlights() {
@@ -106,11 +114,11 @@ public class BookingAgency {
 
     public void addNewPassenger() {
 
-        System.out.println("Enter Passengers name");
+        System.out.println("Enter passenger name: ");
         scanner.next();
         String passengerName = scanner.nextLine();
 
-        System.out.println("Enter Passengers phone number");
+        System.out.println("Enter passenger phone number");
         int passengerPhoneNumber;
         while (!scanner.hasNextInt()) {
             System.out.println("Please enter a valid phone number");
@@ -135,11 +143,14 @@ public class BookingAgency {
     }
 
     public void bookPassenger() {
+
         int passengerId;
         int flightId;
-        System.out.println("Enter passenger Id");
-        passengerId = scanner.nextInt();
         Passenger passenger = null;
+
+        System.out.println("Enter passenger id: ");
+        passengerId = scanner.nextInt();
+
         for (Passenger p : allPassengers) {
             if (p.getId() == passengerId) {
                 passenger = p;
@@ -147,10 +158,10 @@ public class BookingAgency {
         }
 
         if (passenger != null) {
-            System.out.println("Enter flight Id");
+            System.out.println("Enter flight id: ");
             flightId = scanner.nextInt();
             if (flights.stream().filter(f -> f.getFlightId() == flightId).collect(Collectors.toList()).isEmpty()) {
-                System.out.println("Flight does not exist");
+                System.out.println("Flight with id " + flightId + " does not exist");
             } else {
                 for (Flight f : flights) {
                     if (f.getFlightId() == flightId) {
@@ -164,7 +175,7 @@ public class BookingAgency {
 
         } else {
 
-            System.out.println("Passenger does not exist");
+            System.out.println("Passenger with id " + passengerId + " does not exist");
         }
     }
 
