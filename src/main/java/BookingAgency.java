@@ -20,37 +20,78 @@ public class BookingAgency {
 
     }
 
-    public List<Passenger> getPassengers(){
+    public List<Passenger> getPassengers() {
         return this.allPassengers;
     }
 
-    public void bookPassenger(){
+    public void bookPassenger() {
         int passengerId;
         int flightId;
         System.out.println("Enter passenger Id");
         passengerId = scanner.nextInt();
-        System.out.println("Enter flight Id");
-        flightId = scanner.nextInt();
         Passenger passenger = null;
-        for (Passenger p : allPassengers ){
-            System.out.println(p.getId());
-            if (p.getId() == passengerId){
+        for (Passenger p : allPassengers) {
+            if (p.getId() == passengerId) {
                 passenger = p;
             }
         }
-        System.out.println(passenger);
 
-        for (Flight f : flights){
-            if (passenger == null){
-                System.out.println("Passenger does not exist");
-            }   else if (f.getFlightId() == flightId){
-                f.addPassenger(passenger);
+        if (passenger != null) {
+            System.out.println("Enter flight Id");
+            flightId = scanner.nextInt();
+            if (flights.stream().filter(f -> f.getFlightId() == flightId).collect(Collectors.toList()).isEmpty()) {
+                System.out.println("Flight does not exist");
+            } else {
+                for (Flight f : flights) {
+                    if (f.getFlightId() == flightId) {
+                        f.addPassenger(passenger);
+                        System.out.println("added " + passenger + " to " + f);
 
+                    }
                 }
 
             }
 
+        } else {
+
+            System.out.println("Passenger does not exist");
         }
+    }
+
+
+    public void removePassenger(){
+        int passengerId;
+        int flightId;
+        System.out.println("Enter passenger Id to remove");
+        passengerId = scanner.nextInt();
+        Passenger passenger = null;
+        for (Passenger p : allPassengers) {
+            if (p.getId() == passengerId) {
+                passenger = p;
+            }
+        }
+
+        if (passenger != null) {
+            System.out.println("Enter flight Id");
+            flightId = scanner.nextInt();
+            if (flights.stream().filter(f -> f.getFlightId() == flightId).collect(Collectors.toList()).isEmpty()) {
+                System.out.println("Flight does not exist");
+            } else {
+                for (Flight f : flights) {
+                    if (f.getFlightId() == flightId) {
+                        f.removePassenger(passenger);
+                        System.out.println("removed " + passenger + " from " + f);
+
+                    }
+                }
+
+            }
+
+        } else {
+
+            System.out.println("Passenger does not exist");
+        }
+    }
 
 
 
@@ -69,6 +110,11 @@ public class BookingAgency {
     }
 
 
+    public List<Flight> getAllFlights(){
+        return this.flights;
+    }
+
+
     public void addNewPassenger() {
         boolean hasEnteredPhoneNumber = false;
         // Scanner scanner2 = new Scanner(System.in);       // Needs new scanner otherwise it skips the input when adding a second passengers name /
@@ -81,7 +127,7 @@ public class BookingAgency {
             scanner.next();
 
         }
-            passengerPhoneNumber = scanner.nextInt();
+        passengerPhoneNumber = scanner.nextInt();
 
 //        System.out.println("Enter Passengers ID");
 //        int passengerID;
@@ -93,8 +139,8 @@ public class BookingAgency {
 //        passengerID = scanner.nextInt();
         scanner.nextLine(); // Why do we have to add this ? //
         Passenger passenger = new Passenger(passengerName, passengerPhoneNumber, PassengerRandomIdGene.passengerRandomId());
+        allPassengers.add(passenger);
         System.out.println(passenger + " created");
-
 
 
     }

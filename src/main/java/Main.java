@@ -8,5 +8,6 @@ public class Main {
         bookingAgency.addNewFlight();
         bookingAgency.displayAllFlights();
         bookingAgency.bookPassenger();
+        bookingAgency.removePassenger();
     }
 }
