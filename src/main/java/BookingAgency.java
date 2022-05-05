@@ -20,6 +20,49 @@ public class BookingAgency {
 
     }
 
+    public void start() {
+        boolean exit = false;
+        int userInput;
+        while(!exit) {
+            System.out.println("Enter option number");
+            System.out.println("[1] Add new flight");
+            System.out.println("[2] Cancel a flight");
+            System.out.println("[3] Display all available flights");
+            System.out.println("[4] Add a new passenger");
+            System.out.println("[5] Book a passenger onto a flight");
+            System.out.println("[6] Remove a passenger from a flight");
+            System.out.println("[0] exit");
+
+            userInput = scanner.nextInt();
+            switch (userInput) {
+                case 1:
+                    addNewFlight();
+                    break;
+                case 2:
+                    //cancelFlight();
+                    break;
+                case 3:
+                    displayAllFlights();
+                    break;
+                case 4:
+                    addNewPassenger();
+                    break;
+                case 5:
+                    bookPassenger();
+                    break;
+                case 6:
+                    removePassenger();
+                    break;
+                case 0:
+                    exit = true;
+                    break;
+                default:
+                    exit = true;
+                    break;
+            }
+        }
+    }
+
     public List<Passenger> getPassengers() {
         return this.allPassengers;
     }
@@ -159,7 +202,6 @@ public class BookingAgency {
 //
 ////        String input = scanner.nextLine();
 ////        return parseInt(input);
-
 
 }
 
