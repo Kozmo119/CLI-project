@@ -3,6 +3,9 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+
+// service to manage a model
+
 import static java.lang.Integer.parseInt;
 
 public class BookingAgency {
@@ -15,6 +18,10 @@ public class BookingAgency {
         this.allPassengers = new ArrayList<>();
         this.scanner = new Scanner(System.in);
 
+    }
+
+    public List<Passenger> getPassengers(){
+        return this.allPassengers;
     }
 
 
@@ -41,22 +48,20 @@ public class BookingAgency {
         }
             passengerPhoneNumber = scanner.nextInt();
 
-        System.out.println("Enter Passengers ID");
-        int passengerID;
-        while (!scanner.hasNextInt()) {
-            System.out.println("Please enter a valid Passengers ID");
-            scanner.next();
-
-        }
-        passengerID = scanner.nextInt();
+//        System.out.println("Enter Passengers ID");
+//        int passengerID;
+//        while (!scanner.hasNextInt()) {
+//            System.out.println("Please enter a valid Passengers ID");
+//            scanner.next();
+//
+//        }
+//        passengerID = scanner.nextInt();
         scanner.nextLine(); // Why do we have to add this ? //
-        if (allPassengers.stream().filter(passenger -> passenger.getId() == passengerID).collect(Collectors.toList()).isEmpty()) {
-            Passenger passenger = new Passenger(passengerName, passengerPhoneNumber, passengerID);
-            System.out.println(passenger + " added");
-            allPassengers.add(passenger);
-        } else {
-            System.out.println("Passenger with " + passengerID + " ID already exists");
-        }
+        Passenger passenger = new Passenger(passengerName, passengerPhoneNumber, PassengerRandomIdGene.passengerRandomId());
+        System.out.println(passenger + " created");
+
+
+
     }
 //       private int userInputInt(){
 //
