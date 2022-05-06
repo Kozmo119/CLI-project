@@ -12,5 +12,4 @@ public class FlightRandomIdGene {
         allId.add(randomId);
         return randomId;
     }
-
 }

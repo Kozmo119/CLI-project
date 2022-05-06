@@ -13,6 +13,4 @@ public class PassengerRandomIdGene {
         allId.add(randomId);
         return randomId;
     }
-
-
 }

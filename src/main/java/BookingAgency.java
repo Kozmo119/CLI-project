@@ -21,7 +21,6 @@ public class BookingAgency {
         this.flights = new ArrayList<>();
         this.allPassengers = new ArrayList<>();
         this.scanner = new Scanner(System.in);
-
     }
 
     public List<Passenger> getPassengers() {
@@ -45,7 +44,7 @@ public class BookingAgency {
             System.out.println("[6] Remove a passenger from flight");
             System.out.println("[7] Search flights");
             System.out.println("[8] Write flight data to file");
-            System.out.println("[0] exit");
+            System.out.println("[0] Exit");
             System.out.println("Please input a number indicating which action to take:");
 
             userInput = scanner.nextInt();
@@ -89,7 +88,7 @@ public class BookingAgency {
                     exit = true;
                     break;
                 default:
-                    System.out.println("\nPlease enter a valid number\n");
+                    System.out.println("\nPlease enter a valid number");
                     break;
             }
         }
@@ -143,7 +142,6 @@ public class BookingAgency {
 //            System.out.println("Please enter a valid phone number");
 //            scanner.next();
 //        }
-
         passengerPhoneNumber = scanner.nextLine();
         if (passengerPhoneNumber.matches("^[0-9]+$")){
             Passenger passenger = new Passenger(passengerName, passengerPhoneNumber, PassengerRandomIdGene.passengerRandomId());
@@ -152,16 +150,14 @@ public class BookingAgency {
         } else {
             System.out.println("Passenger contact number must contain only digits");
         }
-
-            //        System.out.println("Enter Passengers ID");
+//        System.out.println("Enter Passengers ID");
 //        int passengerID;
 //        while (!scanner.hasNextInt()) {
 //            System.out.println("Please enter a valid Passengers ID");
 //            scanner.next();
 //        }
 //        passengerID = scanner.nextInt();
-        //scanner.nextLine(); // Why do we have to add this ?
-
+//        scanner.nextLine(); // Why do we have to add this ?
     }
 
     public void bookPassenger() {
@@ -272,7 +268,6 @@ public class BookingAgency {
         printWriter.flush();
         printWriter.close();
     }
-
 
 }
 
